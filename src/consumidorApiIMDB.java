@@ -1,21 +1,17 @@
-package br.com.alura.consumidorAPI;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import br.com.alura.modelo.Filme;
-
 public class consumidorApiIMDB {
 
 	public static void main(String[] args) throws Exception {
-		String apiKey = <Inserir aqui seu Tolkien>;
+		String apiKey = <Inserir seu código aqui>;
 		URI apiUrl = URI.create("https://imdb-api.com/en/API/Top250TVs/" + apiKey);
 		
 		HttpClient client = HttpClient.newHttpClient();
@@ -37,35 +33,15 @@ public class consumidorApiIMDB {
 //			System.out.println(string);
 //		}
 		
-		List<String> titles = parseTitle(moviesArray);
+//		List<String> titles = parseTitle(moviesArray);
 //		for (String title : titles) {
 //			System.out.println(title);
 //		}
 		
 		List<String> images = parseImage(moviesArray);
-//		for (String image : images) {
-//			System.out.println(image);
-//		}
-		
-		List<String> years = parseYear(moviesArray);
-//		for (String year : years) {
-//			System.out.println(year);
-//		}
-		
-		List<String> notas = parseRatings(moviesArray);
-//		for (String nota : notas) {
-//			System.out.println(nota);
-//		}
-		
-		List<Filme> filmes = new ArrayList<Filme>();
-		for(int i =  0; i < moviesArray.length; i++) {
-			filmes.add(new Filme(titles.get(i), images.get(i), years.get(i), notas.get(i)));
+		for (String image : images) {
+			System.out.println(image);
 		}
-		
-		for (Filme filme : filmes) {
-			System.out.println(filme);
-		}
-		
 		
 		
 	}
@@ -88,19 +64,13 @@ public class consumidorApiIMDB {
 	}
 	
 	private static List<String> parseTitle(String[] moviesArray) {
-		return parseAtribute(moviesArray, 2);
+		
+		return parseAtribute(moviesArray, 3);
 	}
 	
 	private static List<String> parseImage(String[] moviesArray) {
+		
 		return parseAtribute(moviesArray, 5);
-	}
-	
-	private static List<String> parseYear(String[] moviesArray) {
-		return parseAtribute(moviesArray, 4);
-	}
-	
-	private static List<String> parseRatings(String[] moviesArray) {
-		return parseAtribute(moviesArray, 7);
 	}
 	
 	private static List<String> parseAtribute(String[] moviesArray, int pos) {
